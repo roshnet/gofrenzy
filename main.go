@@ -2,15 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 )
 
 func greet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World! %s", time.Now())
+	fmt.Fprintf(w, "Yo it's working!\n")
+	fmt.Fprintf(w, "Request sent at %s", time.Now())
 }
 
 func main() {
+	port := "8080"
+	fmt.Println("Server running on port", port)
 	http.HandleFunc("/", greet)
-	http.ListenAndServe(":8080", nil)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
